@@ -186,7 +186,7 @@ pub struct Xpt2046<SPI, CS, PinIRQ> {
     /// Control pin
     cs: CS,
     /// Interrupt control pin
-    irq: PinIRQ,
+    pub irq: PinIRQ,
     /// Internall buffers tx
     tx_buff: [u8; TX_BUFF_LEN],
     /// Internal buffer for rx
@@ -255,7 +255,7 @@ where
     }
 
     /// Read the calibrated point of touch from XPT2046
-    fn read_touch_point(&mut self) -> Result<Point, Error<BusError<SPIError, CSError>>> {
+    pub fn read_touch_point(&mut self) -> Result<Point, Error<BusError<SPIError, CSError>>> {
         let raw_point = self.read_xy()?;
 
         let (x, y) = match self.operation_mode {
